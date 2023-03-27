@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CarController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,5 +22,13 @@ Route::get('/', function () {
 Route::middleware('auth')->group(function () {
     //
 });
+
+Route::middleware('auth')->group(function () {
+    Route::get('/cars/create', [CarController::class, 'create_step1'])->name('cars.create');
+
+});
+
+Route::post('/cars/create', [CarController::class, 'create_step2'])->name('cars.create');
+
 
 require __DIR__.'/auth.php';
