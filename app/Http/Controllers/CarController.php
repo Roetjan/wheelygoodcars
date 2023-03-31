@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Car;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 
 class CarController extends Controller
@@ -20,5 +23,22 @@ class CarController extends Controller
         }
         
         return view('cars.CarInfoForm', ['jsonData' => $jsonData]);
+    }
+
+    public function create_car(Request $request){
+        $car = new Car();
+        $car->license_plate = $request->kenteken;
+        $car->make = $request->merk;
+        $car->model = $request->model;
+        $car->weight = intval($request->massa);
+        $car->production_year = substr($request->bouwjaar, 0, 4);
+        $car->color = $request->kleur;
+        $car->doors = $request->aantal_deuren;
+        $car->seats = $request->aantal_zitplaatsen;
+        $car->mileage = $request->kilometer_stand;
+        $car->price = $request->vraagprijs;
+        $car->user_id = Auth::user()->id;
+        $car->save();
+        return redirect()->route('home');
     }
 }
