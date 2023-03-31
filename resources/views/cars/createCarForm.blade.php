@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('main')
-    <form action="{{ route('cars.create')}}" class="mx-auto" method="post">
+    <form action="{{ route('cars.create2')}}" class="mx-auto" method="post">
         @csrf
         <div class="form-control w-50 mx-auto mt-4">
             <label for="kenteken">Vul hier uw kenteken in</label>
