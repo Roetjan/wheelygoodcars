@@ -43,4 +43,9 @@ class CarController extends Controller
         $car->save();
         return redirect()->route('home');
     }
+
+    public function edit($id) {
+        $car = Car::findOrFail($id);
+        return view('cars.editCarForm', ['car' => $car]);
+    }
 }
