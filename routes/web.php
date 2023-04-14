@@ -25,11 +25,9 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/cars/create', [CarController::class, 'create_step1'])->name('cars.create1');
+    Route::post('/cars/create_form', [CarController::class, 'create_step2'])->name('cars.create2');
+    Route::post('/cars/create', [CarController::class, 'create_car'])->name('cars.create');
 
+    Route::get('/cars/edit_form/{id}', [CarController::class, 'edit'])->name('cars.edit');
 });
-
-Route::post('/cars/create_form', [CarController::class, 'create_step2'])->name('cars.create2');
-Route::post('/cars/create', [CarController::class, 'create_car'])->name('cars.create');
-
-
 require __DIR__.'/auth.php';
